@@ -9,18 +9,25 @@ it("This is first cypress test", ()=>{
     cy.get('.product').should('have.length', 5)
     cy.get('.product:visible').should('have.length', 4)
     //parent child chaining
-    cy.get('.products').find('.product').should('have.length', 4)
-    cy.get('.products').find('.product').eq(2).contains("ADD TO CART").click()
+    //Aliasing
+    cy.get('.products').as('productLocator')
+    cy.get('@productLocator').find('.product').should('have.length', 4)
+    cy.get('@productLocator').find('.product').eq(2).contains("ADD TO CART").click().then(function(){
+        console.log('mahesh')
+    })
     //cy.get("ADD TO CART")
-    console.log('mahesh')
-
-    cy.get('.products').find('.product').each(($el, index, $list)=> {
-        const txtVeg=$el.find('h4.priduct-name').text()
+   
+    cy.get('@productLocator').find('.product').each(($el, index, $list)=> {
+        const txtVeg=$el.find('h4.product-name').text()
         if(txtVeg.includes('Cashews'))
         {
             $el.find('button').click()
          }
     })
+    //assert if logo text is correctly displayed or not
+    cy.get('.brand').should('have.text','GREENKART')
+
+    //this is to print logo text in console
     cy.get('.brand').then(function(logoElement){
         cy.log(logoElement.text());
     })
