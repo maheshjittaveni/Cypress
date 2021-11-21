@@ -12,11 +12,18 @@ it("This is first cypress test", ()=>{
     cy.get('.products').find('.product').should('have.length', 4)
     cy.get('.products').find('.product').eq(2).contains("ADD TO CART").click()
     //cy.get("ADD TO CART")
-    cy.get('.products').find('.product').each(($el,index,$list)=>{
+    console.log('mahesh')
+
+    cy.get('.products').find('.product').each(($el, index, $list)=> {
         const txtVeg=$el.find('h4.priduct-name').text()
+        if(txtVeg.includes('Cashews'))
+        {
+            $el.find('button').click()
+         }
+    })
+    cy.get('.brand').then(function(logoElement){
+        cy.log(logoElement.text());
     })
     
-})
-
-    
+})  
 })
