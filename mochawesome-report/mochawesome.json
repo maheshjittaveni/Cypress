@@ -1,0 +1,100 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-12-02T13:53:28.226Z",
+    "end": "2021-12-02T13:53:40.161Z",
+    "duration": 11935,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "dbeb904a-75e1-43e1-9911-90d8603e30f3",
+      "title": "",
+      "fullFile": "cypress/integration/CypressTesting/framework.js",
+      "file": "cypress/integration/CypressTesting/framework.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "00007c06-d517-484e-8f20-eef35c1dd074",
+          "title": "My Framework Test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "This is Framework cypress test",
+              "fullTitle": "My Framework Test Suite This is Framework cypress test",
+              "timedOut": null,
+              "duration": 9958,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const homePage = new _HomePage.default();\nconst productPage = new _ProductPage.default();\ncy.visit(Cypress.env(\"url\") + \"/angularpractice\");\nhomePage.getEditBox().type(testData.name1);\nhomePage.getGender().select(testData.gender1);\nhomePage.getTwoWayDataBinding().should('have.value', testData.name1);\nhomePage.getEditBox().should('have.attr', 'minlength', '2');\nhomePage.getEntrepreneur().should('be.disabled'); // to pause the script for debugging\n//cy.pause() we should not include it in the prod code, once the issue has been resloved we need to remove this pause and debug\n//cy.debug()\n// explicitly declaring timeout for specific spec file, this timeout is applied from the below step only\nCypress.config('defaultCommandTimeout', 8000);\nhomePage.getShopTab().click();\ntestData.productName.forEach(element => cy.selectProduct(element));\nproductPage.checkOutButton().click();\nvar sum = 0;\nproductPage.getTotal().each(($el, index, $list) => {\n  const amout = $el.text();\n  var res = amout.split(\" \");\n  res = res[1].trim();\n  sum = Number(sum) + Number(res); //convert string to integer or number\n}).then(function () {\n  //Resolving the promise here\n  cy.log(sum);\n});\nproductPage.getTotalFinal().then(function (element) {\n  const amout = element.text();\n  var res = amout.split(\" \");\n  var total = res[1].trim();\n  expect(Number(total)).to.equal(sum);\n});\nproductPage.checkOutButton2().click();\nproductPage.getLocation().type(\"india\");\nproductPage.getAutosuggestion().click();\nproductPage.clickCheckbox().check({\n  force: true\n});\nproductPage.clickPurchase().click(); //productPage.getAlert().should('have.text','Success! Thank you! Your order will be delivered in next few weeks :-).')\nproductPage.getAlert().then(function (element) {\n  const actualText = element.text();\n  expect(actualText.includes(\"Success\")).to.be.true;\n});",
+              "err": {},
+              "uuid": "a96be495-f469-4202-86db-a96422f9eae5",
+              "parentUUID": "00007c06-d517-484e-8f20-eef35c1dd074",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a96be495-f469-4202-86db-a96422f9eae5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9958,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.0.1"
+    }
+  }
+}
