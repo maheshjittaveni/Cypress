@@ -3,7 +3,8 @@
 describe("My First Test Suite", function(){
 
 it("This is first cypress test", ()=>{
-    cy.visit("https://rahulshettyacademy.com/seleniumPractise")
+    //cy.visit("https://rahulshettyacademy.com/seleniumPractise")
+    cy.visit(Cypress.env("url")+"/seleniumPractise")    
     cy.get('.search-keyword').type("ca")
     cy.wait(2000)
     cy.get('.product').should('have.length', 5)

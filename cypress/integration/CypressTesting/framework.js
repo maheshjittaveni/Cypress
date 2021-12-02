@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-import HomePage from "../pageObjects/HomePage"
-import ProductPage from "../pageObjects/ProductPage"
+import HomePage from "../../support/pageObjects/HomePage"
+import ProductPage from "../../support/pageObjects/ProductPage"
 
 describe("My Framework Test Suite", function(){
 var testData
@@ -15,7 +15,7 @@ it("This is Framework cypress test", ()=>{
  
     const homePage=new HomePage()
     const productPage=new ProductPage()
-    cy.visit("https://rahulshettyacademy.com/angularpractice/")
+    cy.visit(Cypress.env("url")+"/angularpractice")
     
     homePage.getEditBox().type(testData.name1)
     homePage.getGender().select(testData.gender1)
@@ -27,10 +27,27 @@ it("This is Framework cypress test", ()=>{
     //cy.debug()
 
        // explicitly declaring timeout for specific spec file, this timeout is applied from the below step only
-       Cypress.config('defaultCommandTimeout',8000)
+    Cypress.config('defaultCommandTimeout',8000)
     homePage.getShopTab().click()
     testData.productName.forEach(element => cy.selectProduct(element));
     productPage.checkOutButton().click()
+
+    var sum=0
+    productPage.getTotal().each(($el, index, $list)=>{
+        const amout=$el.text()
+        var res=amout.split(" ")
+        res=res[1].trim()
+        sum=Number(sum)+Number(res)//convert string to integer or number
+        
+    }).then(function(){//Resolving the promise here
+        cy.log(sum)
+    })
+    productPage.getTotalFinal().then(function(element){
+        const amout=element.text()
+        var res=amout.split(" ")
+        var total=res[1].trim()
+        expect(Number(total)).to.equal(sum)
+    })
     productPage.checkOutButton2().click()
     productPage.getLocation().type("india")
     productPage.getAutosuggestion().click()

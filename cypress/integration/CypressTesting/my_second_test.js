@@ -3,7 +3,8 @@
 describe("My Second Test Suite", function(){
 
 it("This is Second cypress test", ()=>{
-    cy.visit("https://rahulshettyacademy.com/seleniumPractise")
+    //cy.visit("https://rahulshettyacademy.com/seleniumPractise")
+    cy.visit(Cypress.env("url")+"/seleniumPractise")
     cy.get('.search-keyword').type("ca")
     cy.wait(2000)
     //Aliasing

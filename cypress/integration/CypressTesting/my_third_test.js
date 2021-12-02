@@ -3,7 +3,8 @@
 describe("My Third Test Suite", function(){
 
 it("This is Third cypress test", ()=>{
-    cy.visit("https://rahulshettyacademy.com/AutomationPractice")
+    //cy.visit("https://rahulshettyacademy.com/AutomationPractice")
+    cy.visit(Cypress.env("url")+"/AutomationPractice")
     //multiple assertions- chai js library
     //Check boxes
     cy.get('#checkBoxOption1').check().should('be.checked').and('have.value','option1')

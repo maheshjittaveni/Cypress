@@ -3,7 +3,8 @@
 describe("My 4th Test Suite", function(){
 
 it("This is 4th cypress test", ()=>{
-    cy.visit("http://rahulshettyacademy.com/AutomationPractice")
+    //cy.visit("http://rahulshettyacademy.com/AutomationPractice")
+    cy.visit(Cypress.env("url")+"/AutomationPractice")
     cy.get('#alertbtn').click()
     cy.get('#confirmbtn').click()
     
