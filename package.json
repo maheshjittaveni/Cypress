@@ -6,16 +6,26 @@
   "scripts": {
     "test": "npx cypress run",
     "headTest": "npm run test -- --headed",
-    "chromeTest":"npm run test -- --browser chrome",
-    "recardDashBoardTest":"npm run test -- --record --key 87dacaac-0faa-4b8a-aa28-669fbda45db2 --reporter mochawesome",
-    "GreenkartTests":"npm run test --spec \"/cypress/integration/Greenkart/*\" "
-    
+    "chromeTest": "npm run test -- --browser chrome",
+    "recardDashBoardTest": "npm run test -- --record --key 87dacaac-0faa-4b8a-aa28-669fbda45db2 --reporter mochawesome",
+    "GreenkartTests": "npm run test --spec \"/cypress/integration/Greenkart/*\" "
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cypress-cucumber-preprocessor": "^4.3.0",
     "cypress-iframe": "^1.0.1",
-    "mochawesome": "^7.0.1"
+    "mochawesome": "^7.0.1",
+    "multiple-cucumber-html-reporter": "^1.18.3"
   }
 }

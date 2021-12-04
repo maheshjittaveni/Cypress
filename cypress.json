@@ -7,7 +7,7 @@
   },
   "retries":{
     "runMode":1
-
   },
+  "testFiles":"**/*.feature",
   "projectId": "4x8ekd"
 }
